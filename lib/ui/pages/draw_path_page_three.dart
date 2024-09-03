@@ -10,6 +10,7 @@ class DrawPathPageThree extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            _CustomBackground(size: size),
             const SizedBox(
               height: 30,
             ),
@@ -52,6 +53,20 @@ class DrawPathPageThree extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _CustomBackground extends StatelessWidget {
+  const _CustomBackground({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
