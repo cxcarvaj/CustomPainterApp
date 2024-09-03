@@ -9,59 +9,81 @@ class DrawPathPage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Draw Path'),
       ),
-      body: Center(
+      body: const Center(
         child: Stack(
           children: [
-            Container(
-              height: 250,
-              width: 400,
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFFE42C66),
-                    Color(0xFFF55B46),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: CustomPaint(
-                painter: EllipsePainter(
-                  color: Colors.black.withOpacity(0.1),
-                ),
+            _CardBackground(),
+            _CardData(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardData extends StatelessWidget {
+  const _CardData({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Positioned(
+      top: 30,
+      left: 20,
+      child: SizedBox(
+        width: 200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Current Balance',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const Positioned(
-              top: 30,
-              left: 20,
-              child: SizedBox(
-                width: 200,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Current Balance',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      '\$ 2,500.00',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
+            SizedBox(height: 10),
+            Text(
+              '\$ 2,500.00',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardBackground extends StatelessWidget {
+  const _CardBackground({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      width: 400,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFFE42C66),
+            Color(0xFFF55B46),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: CustomPaint(
+        painter: EllipsePainter(
+          color: Colors.black.withOpacity(0.1),
         ),
       ),
     );
