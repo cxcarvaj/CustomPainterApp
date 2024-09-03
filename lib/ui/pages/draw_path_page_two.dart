@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class DrawPathPageTwo extends StatelessWidget {
@@ -125,6 +127,9 @@ class ParablePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final initialYPoint = size.height * 0.8;
 
+    final x1ControlPoint = size.width / 2;
+    final y1ControlPoint = size.height * 1.1;
+
     final rect = Rect.fromLTWH(0, 0, size.width, size.height);
     final brush = Paint()..shader = gradient.createShader(rect);
 
@@ -133,8 +138,8 @@ class ParablePainter extends CustomPainter {
       ..lineTo(0, initialYPoint)
       // Crear una parábola cóncava hacia arriba usando quadraticBezierTo
       ..quadraticBezierTo(
-        size.width / 2, // Punto de control (centro inferior)
-        size.height * 1.1, // Altura mínima de la parábola
+        x1ControlPoint, // Punto de control (centro inferior)
+        y1ControlPoint, // Altura mínima de la parábola
         size.width, // Punto final (esquina superior derecha)
         initialYPoint, // Misma altura que el punto inicial
       )
@@ -153,7 +158,7 @@ class ParablePainter extends CustomPainter {
       PointMode.points,
       [
         Offset(0, initialYPoint),
-        Offset(size.width / 2, size.height * 1.1),
+        Offset(x1ControlPoint, y1ControlPoint),
         Offset(size.width, initialYPoint),
       ],
       controlPoints,
