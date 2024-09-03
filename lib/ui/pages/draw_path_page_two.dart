@@ -23,6 +23,7 @@ class DrawPathPageTwo extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            _CustomBackground(size: size),
             const Text(
               'Welcome to Flutter Day',
               style: TextStyle(
@@ -83,6 +84,20 @@ class _ActionButton extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _CustomBackground extends StatelessWidget {
+  const _CustomBackground({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
