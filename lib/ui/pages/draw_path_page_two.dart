@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class DrawPathPageTwo extends StatelessWidget {
@@ -25,22 +23,7 @@ class DrawPathPageTwo extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: size.width,
-              height: size.height * 0.6,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-              ),
-              child: const CustomPaint(
-                painter: ParablePainter(
-                  gradient: LinearGradient(
-                    colors: [Colors.teal, Colors.blue],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-              ),
-            ),
+            _CustomBackground(size: size),
             const Text(
               'Welcome to Flutter Day',
               style: TextStyle(
@@ -58,35 +41,75 @@ class DrawPathPageTwo extends StatelessWidget {
             SizedBox(
               height: size.height * 0.1,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32.0,
-                  vertical: 16.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(40.0),
-                  side: const BorderSide(
-                    color: Colors.teal,
-                    width: 2.0,
-                  ),
-                ),
-              ),
-              child: const Text(
-                'Join the event',
-                style: TextStyle(
-                  color: Colors.teal,
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+            const _ActionButton(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ActionButton extends StatelessWidget {
+  const _ActionButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 32.0,
+          vertical: 16.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0),
+          side: const BorderSide(
+            color: Colors.teal,
+            width: 2.0,
+          ),
+        ),
+      ),
+      child: const Text(
+        'Join the event',
+        style: TextStyle(
+          color: Colors.teal,
+          fontSize: 18.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomBackground extends StatelessWidget {
+  const _CustomBackground({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.width,
+      height: size.height * 0.6,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      child: const CustomPaint(
+        painter: ParablePainter(
+          gradient: LinearGradient(
+            colors: [Colors.teal, Colors.blue],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
       ),
     );
