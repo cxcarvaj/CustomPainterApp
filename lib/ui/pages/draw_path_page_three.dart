@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class DrawPathPageThree extends StatelessWidget {
@@ -12,18 +10,7 @@ class DrawPathPageThree extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: size.width,
-              height: size.height * 0.6,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-              ),
-              child: CustomPaint(
-                painter: MultiParablePainter(
-                  color: Colors.blue[800]!,
-                ),
-              ),
-            ),
+            _CustomBackground(size: size),
             const SizedBox(
               height: 30,
             ),
@@ -61,39 +48,78 @@ class DrawPathPageThree extends StatelessWidget {
             SizedBox(
               height: size.height * 0.1,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32.0,
-                  vertical: 16.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  side: const BorderSide(
-                    color: Colors.blue,
-                    width: 2.0,
-                  ),
-                ),
-              ),
-              child: SizedBox(
-                width: size.width * 0.5,
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
+            _LoginButton(size: size),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomBackground extends StatelessWidget {
+  const _CustomBackground({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size.width,
+      height: size.height * 0.6,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      child: CustomPaint(
+        painter: MultiParablePainter(
+          color: Colors.blue[800]!,
+        ),
+      ),
+    );
+  }
+}
+
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({
+    super.key,
+    required this.size,
+  });
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.blue,
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 32.0,
+          vertical: 16.0,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: const BorderSide(
+            color: Colors.blue,
+            width: 2.0,
+          ),
+        ),
+      ),
+      child: SizedBox(
+        width: size.width * 0.5,
+        child: const Text(
+          'Login',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
         ),
       ),
     );
