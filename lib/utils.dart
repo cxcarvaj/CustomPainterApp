@@ -27,12 +27,6 @@ List<PagesModel> pages = [
     iconColor: Colors.amber,
   ),
   PagesModel(
-    label: 'Custom Card',
-    icon: Icons.credit_card,
-    page: const DrawPathPage(),
-    iconColor: Colors.lightBlueAccent,
-  ),
-  PagesModel(
     label: 'Welcome Screen',
     icon: Icons.pattern_sharp,
     page: const DrawPathPageTwo(),
@@ -43,5 +37,11 @@ List<PagesModel> pages = [
     icon: Icons.cable_outlined,
     page: const DrawPathPageThree(),
     iconColor: Colors.pink,
+  ),
+  PagesModel(
+    label: 'Custom Card',
+    icon: Icons.credit_card,
+    page: const DrawPathPage(),
+    iconColor: Colors.lightBlueAccent,
   ),
 ];
