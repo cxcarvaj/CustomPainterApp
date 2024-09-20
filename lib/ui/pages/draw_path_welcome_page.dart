@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class DrawPathPageTwo extends StatelessWidget {
@@ -97,7 +99,22 @@ class _CustomBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      width: size.width,
+      height: size.height * 0.6,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      child: const CustomPaint(
+        painter: ParablePainter(
+          gradient: LinearGradient(
+            colors: [Colors.teal, Colors.blue],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -108,12 +125,46 @@ class ParablePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    final initialYPoint = size.height * 0.8;
+
+    final x1ControlPoint = size.width / 2;
+    final y1ControlPoint = size.height * 1.1;
+
+    final rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    final brush = Paint()..shader = gradient.createShader(rect);
+
+    final path = Path()
+      // Punto inicial (esquina superior izquierda)
+      ..lineTo(0, initialYPoint)
+      // Crear una parábola cóncava hacia arriba usando quadraticBezierTo
+      ..quadraticBezierTo(
+        x1ControlPoint, // Punto de control (centro inferior)
+        y1ControlPoint, // Altura mínima de la parábola
+        size.width, // Punto final (esquina superior derecha)
+        initialYPoint, // Misma altura que el punto inicial
+      )
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, brush);
+
+    // Draw the control points
+    final controlPoints = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 10.0
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawPoints(
+      PointMode.points,
+      [
+        Offset(0, initialYPoint),
+        Offset(x1ControlPoint, y1ControlPoint),
+        Offset(size.width, initialYPoint),
+      ],
+      controlPoints,
+    );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

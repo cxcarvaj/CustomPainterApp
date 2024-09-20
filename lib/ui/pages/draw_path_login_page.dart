@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class DrawPathPageThree extends StatelessWidget {
@@ -66,7 +68,18 @@ class _CustomBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      width: size.width,
+      height: size.height * 0.6,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+      ),
+      child: CustomPaint(
+        painter: MultiParablePainter(
+          color: Colors.blue[800]!,
+        ),
+      ),
+    );
   }
 }
 
@@ -122,12 +135,51 @@ class MultiParablePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    final initialYPoint = size.height * 0.9;
+
+    final x1ControlPoint = size.width * 0.4;
+    final y1ControlPoint = size.height * 0.7;
+
+    final x2ControlPoint = size.width * 0.6;
+    final y2ControlPoint = size.height * 1.1;
+
+    final brush = Paint()..color = color;
+
+    final path = Path()
+      // Punto inicial (esquina superior izquierda)
+      ..lineTo(0, initialYPoint)
+      // Crear la parábola multiple cóncava hacia abajo y hacia arriba usando cubicTo
+      ..cubicTo(
+        x1ControlPoint,
+        y1ControlPoint,
+        x2ControlPoint,
+        y2ControlPoint,
+        size.width,
+        initialYPoint,
+      )
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, brush);
+
+    // Draw the control points
+    final controlPoints = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 10.0
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawPoints(
+      PointMode.lines,
+      [
+        Offset(0, initialYPoint),
+        Offset(x1ControlPoint, y1ControlPoint),
+        Offset(x2ControlPoint, y2ControlPoint),
+        Offset(size.width, initialYPoint),
+      ],
+      controlPoints,
+    );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
